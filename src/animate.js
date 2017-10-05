@@ -24,7 +24,9 @@ const getPropUnit = (value) => {
     } else if (value.indexOf('rem') >= 0) {
         return 'rem';
     }
-    throw new Error(`The unit of ${value} can't be allocated, please on of the following units to animate: px, %, em, rem`);
+
+    // No unit found
+    return '';
 };
 
 /**
@@ -34,12 +36,12 @@ const getPropUnit = (value) => {
  *
  * @param {Element} el - The Element you want to animate
  * @param {Object} props - The properties you want to animate to
- * @param {Integer} duration - (optional, default = 1000) Time for the animation in ms
+ * @param {Integer} duration - (optional, default = 400) Time for the animation in ms
  * @param {Array} params - Further optional params
  *                         [, easing|callback [, callback|forceCallback [, forceCallback]]]
  * @return {Function} cancelAnimation - Cancels animation if called
  */
-export const animate = (el, props, duration = 1000, ...params) => {
+export const animate = (el, props, duration = 400, ...params) => {
     let canceled = false;
     let easing = 'linear';
     let callback;
@@ -141,11 +143,11 @@ export const animate = (el, props, duration = 1000, ...params) => {
  *
  * @param {Element} el - The Element you want to animate
  * @param {Object} props - The properties you want to animate to
- * @param {Integer} duration - (optional, default = 1000) Time for the animation in ms
+ * @param {Integer} duration - (optional, default = 400) Time for the animation in ms
  * @param {String} easing - (optional, default = 'linear') The desired easing
  * @return {Promise} resolves when animation finished, rejects if an error is thrown inside animate
  */
-export const animateAsPromise = (el, props, duration = 1000, easing = 'linear') =>
+export const animateAsPromise = (el, props, duration = 400, easing = 'linear') =>
     new Promise((resolve, reject) => {
         try {
             animate(el, props, duration, easing, resolve);
@@ -163,15 +165,13 @@ export const polyfill = (animatePropName = 'customAnimate', animateAsPromiseProp
             return animate(this, ...params);
         };
     } else {
-        throw new Error(`Element.prototype.${animatePropName} is already taken, ${animatePropName}
-            can't be added onto the Element.prototype`);
+        throw new Error(`Element.prototype.${animatePropName} is already taken, ${animatePropName} can't be added onto the Element.prototype`);
     }
     if (!Element.prototype[animateAsPromisePropName]) {
         Element.prototype[animateAsPromisePropName] = function customAnimateAsPromise(...params) {
             return animateAsPromise(this, ...params);
         };
     } else {
-        throw new Error(`Element.prototype.${animateAsPromisePropName} is already taken, ${animateAsPromisePropName}
-            can't be added onto the Element.prototype`);
+        throw new Error(`Element.prototype.${animateAsPromisePropName} is already taken, ${animateAsPromisePropName} can't be added onto the Element.prototype`);
     }
 };

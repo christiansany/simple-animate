@@ -1,5 +1,5 @@
 import test from 'ava';
-// import polyfill, { animate, animateAsPromise } from './animate';
+// import { animate, animateAsPromise, polyfill } from './animate';
 
 // polyfill();
 
