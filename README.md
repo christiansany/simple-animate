@@ -20,8 +20,6 @@ import { polyfill, animate, animateAsPromise } from 'simple-animate';
 const SimpleAnimate = require('simple-animate');
 ```
 
-## TODO: Add information for what you can animate and what not
-
 ## API
 
 * [animate(el, props [, duration [, easing] [, callback [, forceCallback] ] ] )](#animate) ⇒ <code>Function</code>
@@ -135,6 +133,7 @@ The functions animate and animateAsPromise can be used as shown above with one d
 | animatePropName | <code>String</code> | customAnimate | Propertyname you want to allocate on the Element.prototype for the animate function |
 | animateAsPromisePropName | <code>String</code> | customAnimateAsPromise | Propertyname you want to allocate on the Element.prototype for the animateAsPromise function  |
 
+**Example**
 ```javascript
 // ES6 Module
 import { polyfill } from 'simple-animate';
