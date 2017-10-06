@@ -4,6 +4,9 @@ This is a small and minimalistic animation library.
 You can only animate single value properties like opacity, width or height for example.
 If you want to animate properties like margin, you have to use every property separately as margin-top, margin-right etc.
 
+> If you find any issues or bugs with this package, feel free to open an issue on [github](https://github.com/christiansany/simple-animate/issues) and i will try to resolve it as fast as possible. Or simply fix the bugs yourself and open a pull request.
+
+
 ## Installation
 
 ```shell
@@ -30,7 +33,7 @@ const SimpleAnimate = require('simple-animate');
 
 ### animate(el, props [, duration [, easing] [, callback [, forceCallback] ] ])
 
-TODO: Add description
+Animate an element to target props.
 
 **Returns**: <code>Function</code> - Returns a function which cancels the animation if called
 
@@ -85,7 +88,7 @@ setTimeout(cancelAnimation, 200);
 
 This is the same as animate, but returns a Promise. This looks nicer, but can't be canceled.
 
-**Returns**: <code>Function</code> - Returns a function which cancels the animation if called
+**Returns**: <code>Promise</code> - Returns a Promise which resolves when the animation ends.
 
 | Param | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -144,14 +147,14 @@ const polyfill = require('simple-animate').polyfill;
 // This adds customAnimate and customAnimateAsPromise to Element.prototype
 polyfill();
 
-// Using animate
+// Fetching Element from DOM
 const div = document.querySelector('div');
 
 // Normal animation
 div.customAnimate({ width: '200px', height: '100px' }, 500, 'easeInOutCubic');
 
 // Animation which returns a promise
-div.animateAsPromise({ width: '300px', height: '200px' }, 500, 'easeInOutCubic')
+div.customAnimateAsPromise({ width: '300px', height: '200px' }, 500, 'easeInOutCubic')
     .then(function () {
         console.log('Animation finished, YAY!');
     });
